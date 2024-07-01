@@ -4,4 +4,7 @@ class Card < ApplicationRecord
 
   validates :activation_number, presence: true
   validates :status, inclusion: { in: %w(active cancelled) }
+
+  has_paper_trail
+
 end

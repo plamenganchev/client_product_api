@@ -23,8 +23,4 @@ class User < ApplicationRecord
     self.authentication_token = SecureRandom.hex(10)
     save!
   end
-  def self.authenticate_with_token(token)
-    User.find_by(authentication_token: token)
-  end
-
 end

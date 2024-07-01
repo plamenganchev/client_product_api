@@ -5,7 +5,7 @@ class BrandsController < ApiController
   end
 
 
-  def record_params
+  def permitted_params
     params.require(:brand).permit(:name, :country, :description, :status)
   end
 end

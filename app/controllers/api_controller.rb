@@ -16,7 +16,7 @@ class ApiController < ApplicationController
   end
 
   def create
-    record = model_class.new(record_params)
+    record = model_class.new(permitted_params)
     if record.save
       render json: record, status: :created
     else
@@ -25,7 +25,7 @@ class ApiController < ApplicationController
   end
 
   def update
-    if @record.update(record_params)
+    if @record.update(permitted_params)
       render json: @record, status: :ok
     else
       render json: @record.errors, status: :unprocessable_entity
@@ -47,8 +47,8 @@ class ApiController < ApplicationController
     raise NotImplementedError, "This #{self.class} cannot respond to 'model_class'"
   end
 
-  def record_params
-    raise NotImplementedError, "This #{self.class} cannot respond to 'record_params'"
+  def permitted_params
+    raise NotImplementedError, "This #{self.class} cannot respond to 'permitted_params'"
   end
   def authenticate_admin
     # Can be extended with RolePermissions model

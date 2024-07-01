@@ -31,7 +31,7 @@ class ProductsController < ApiController
     Product
   end
 
-  def record_params
+  def permitted_params
     params.require(:product).permit(:name, :description, :price, :status, :brand_id)
   end
 end
