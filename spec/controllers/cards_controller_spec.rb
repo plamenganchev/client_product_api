@@ -46,7 +46,7 @@ RSpec.describe CardsController, type: :controller do
       card
       get :generate_report, params: {}
       expect(response).to be_successful
-      expect(JSON.parse(response.body)['records'].first['id']).to eq(card.id)
+      expect(JSON.parse(response.body)['data'].first['id']).to eq(card.id)
     end
   end
 end

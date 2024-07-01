@@ -61,10 +61,11 @@ class ApiController < ApplicationController
     per_page = (params[:per_page] || DEFAULT_PER_PAGE).to_i
     paginated_records = records.page(page).per(per_page)
     {
-      records: paginated_records,
-      total_records: paginated_records.total_count,
+      data: paginated_records,
       page: page,
-      per_page: per_page
+      per_page: per_page,
+      total_pages: paginated_records.total_pages,
+      total_records: paginated_records.total_count,
     }
   end
 end

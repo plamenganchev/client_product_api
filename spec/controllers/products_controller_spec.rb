@@ -19,7 +19,7 @@ RSpec.describe ProductsController, type: :controller do
       product = Product.create! valid_attributes
       get :search, params: { query: 'Test' }
       expect(response).to be_successful
-      expect(JSON.parse(response.body)['records'].first['name']).to eq(product.name)
+      expect(JSON.parse(response.body)['data'].first['name']).to eq(product.name)
     end
   end
   describe 'POST #assign_to_user' do
@@ -47,7 +47,7 @@ RSpec.describe ProductsController, type: :controller do
         client_user.products << product
         get :accessible, params: {}
         expect(response).to be_successful
-        expect(JSON.parse(response.body)['records'].first['id']).to eq(product.id)
+        expect(JSON.parse(response.body)['data'].first['id']).to eq(product.id)
       end
     end
   end
