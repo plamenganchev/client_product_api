@@ -26,14 +26,14 @@ RSpec.describe ProductsController, type: :controller do
     context 'as an admin user' do
       it 'assigns a product to a user' do
         request.headers['Authorization'] = "Bearer #{JwtService.encode(user_id: admin_user.id)}"
-        post :assign_to_user, params: { user_id: client_user.id, product_id: product.id }
+        post :assign_to_user, params: { user_id: client_user.id, product_ids: [product.id] }
         expect(response).to have_http_status(:ok)
         expect(client_user.products).to include(product)
       end
 
       it 'returns unprocessable entity status if duplicate record' do
         client_user.products << product
-        post :assign_to_user, params: { user_id: client_user.id, product_id: product.id }
+        post :assign_to_user, params: { user_id: client_user.id, product_ids: [product.id] }
         expect(response).to have_http_status(:unprocessable_entity)
       end
     end
