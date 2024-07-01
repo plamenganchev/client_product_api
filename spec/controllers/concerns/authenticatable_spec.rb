@@ -12,7 +12,7 @@ RSpec.describe Authenticatable, type: :controller do
   describe 'authentication' do
     context 'when valid token is provided' do
       let(:admin_user) { create(:user, user_role: create(:user_role, role: 'admin'), email: 'admin@example.com', password: '123456') }
-      let(:token) { JwtHelper.encode(user_id: admin_user.id) }
+      let(:token) { JwtService.encode(user_id: admin_user.id) }
 
       before { request.headers['Authorization'] = "Bearer #{token}" }
 

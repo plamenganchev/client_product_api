@@ -1,10 +1,10 @@
 require 'rails_helper'
 
-RSpec.describe JwtHelper, type: :helper do
+RSpec.describe JwtService, type: :helper do
 
 
   let(:payload) { { user_id: 1 } }
-  let(:token) { JwtHelper.encode(payload) }
+  let(:token) { JwtService.encode(payload) }
 
   describe '.encode' do
     it 'returns a JWT token' do
@@ -14,7 +14,7 @@ RSpec.describe JwtHelper, type: :helper do
 
   describe '.decode' do
     it 'decodes a JWT token' do
-      decoded_payload = JwtHelper.decode(token)
+      decoded_payload = JwtService.decode(token)
       expect(decoded_payload[:user_id]).to eq(1)
     end
   end

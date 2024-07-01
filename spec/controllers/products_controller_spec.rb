@@ -25,7 +25,7 @@ RSpec.describe ProductsController, type: :controller do
   describe 'POST #assign_to_user' do
     context 'as an admin user' do
       it 'assigns a product to a user' do
-        request.headers['Authorization'] = "Bearer #{JwtHelper.encode(user_id: admin_user.id)}"
+        request.headers['Authorization'] = "Bearer #{JwtService.encode(user_id: admin_user.id)}"
         post :assign_to_user, params: { user_id: client_user.id, product_id: product.id }
         expect(response).to have_http_status(:ok)
         expect(client_user.products).to include(product)

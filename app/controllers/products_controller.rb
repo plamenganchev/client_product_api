@@ -21,7 +21,7 @@ class ProductsController < ApiController
   end
 
   def accessible
-    products = current_user.products
+    products = current_user.products.active
     render json: paginate_records(products)
   end
 

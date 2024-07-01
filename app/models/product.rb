@@ -6,6 +6,7 @@ class Product < ApplicationRecord
   validates :name, :price, presence: true
   validates :status, inclusion: { in: %w(active inactive) }
 
+  scope :active, -> { joins(:brand).where(products: { status: 'active' }, brands: { status: 'active' }) }
 
   has_paper_trail
 end
