@@ -22,6 +22,10 @@ class ProductsController < ApiController
 
   def accessible
     products = current_user.products.active
+    products = Product.where("products.name LIKE ?", "%#{params[:name]}%") if params[:name]
+    products = products.where("products.description LIKE ?", "%#{params[:description]}%") if params[:description]
+    products = products.joins(:brand).where("brands.name LIKE ?", "%#{params[:brand_name]}%") if params[:brand_name]
+    products = products.where(price: params[:min_price]..params[:max_price]) if params[:min_price].present? && params[:max_price].present?
     render json: paginate_records(products)
   end
 
