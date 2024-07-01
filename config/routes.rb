@@ -13,15 +13,20 @@ Rails.application.routes.draw do
   resources :brands
   resources :products, only: [:index] do
     collection do
-      post 'issue_card'
-      post 'cancel_card'
-      post 'assign_to_client'
-      get 'search'
-      get 'generate_report'
-      get 'accessible'
+      post :assign_to_client
+      get :search
+      get :generate_report
+      get :accessible
+      get :assign_to_user
     end
   end
-  resources :accessible_products, only: [:create, :index]
+  resources :cards, only: [] do
+    collection do
+      post :issue
+      put :cancel
+      get :generate_report
+    end
+  end
   resources :users, only: [:create]
   resources :transactions, only: [:create]
 

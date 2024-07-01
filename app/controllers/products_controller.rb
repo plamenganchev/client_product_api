@@ -41,11 +41,14 @@ class ProductsController < ApiController
   def assign_to_user
     user = User.find(params[:user_id])
     product = Product.find(params[:product_id])
-
-    if user.products << product
-      render json: { message: 'Product assigned to user successfully' }, status: :ok
-    else
-      render json: { error: 'Failed to assign product to user' }, status: :unprocessable_entity
+    begin
+      if user.products << product
+        render json: { message: 'Product assigned to user successfully' }, status: :ok
+      else
+        render json: { error: 'Failed to assign product to user' }, status: :unprocessable_entity
+      end
+    rescue ActiveRecord::RecordNotUnique
+      render json: { error: 'Already assigned' }, status: :unprocessable_entity
     end
   end
 

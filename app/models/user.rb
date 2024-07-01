@@ -7,9 +7,9 @@ class User < ApplicationRecord
 
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
 
-  has_many :accessible_products
-  has_many :products, through: :accessible_products
+  has_and_belongs_to_many  :products, :join_table => :users_products
   has_many :transactions
+  has_many :cards
 
   has_paper_trail
 

@@ -1,7 +1,6 @@
 class Product < ApplicationRecord
   belongs_to :brand
-  has_many :accessible_products
-  has_many :users, through: :accessible_products
+  has_and_belongs_to_many  :users, :join_table => :users_products
   has_many :transactions
 
   validates :name, :price, presence: true

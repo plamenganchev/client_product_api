@@ -14,16 +14,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_30_173223) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "accessible_products", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "product_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["product_id"], name: "index_accessible_products_on_product_id"
-    t.index ["user_id", "product_id"], name: "index_accessible_products_on_user_id_and_product_id", unique: true
-    t.index ["user_id"], name: "index_accessible_products_on_user_id"
-  end
-
   create_table "brands", force: :cascade do |t|
     t.string "name"
     t.string "country"
@@ -42,7 +32,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_30_173223) do
     t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["product_id", "user_id"], name: "index_cards_on_product_id_and_user_id", unique: true
     t.index ["product_id"], name: "index_cards_on_product_id"
     t.index ["user_id"], name: "index_cards_on_user_id"
   end
@@ -88,6 +77,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_30_173223) do
     t.index ["user_role_id"], name: "index_users_on_user_role_id"
   end
 
+  create_table "users_products", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "product_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_users_products_on_product_id"
+    t.index ["user_id", "product_id"], name: "index_users_products_on_user_id_and_product_id", unique: true
+    t.index ["user_id"], name: "index_users_products_on_user_id"
+  end
+
   create_table "versions", force: :cascade do |t|
     t.string "item_type", null: false
     t.bigint "item_id", null: false
@@ -98,12 +97,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_30_173223) do
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
   end
 
-  add_foreign_key "accessible_products", "products"
-  add_foreign_key "accessible_products", "users"
   add_foreign_key "cards", "products"
   add_foreign_key "cards", "users"
   add_foreign_key "products", "brands"
   add_foreign_key "transactions", "products"
   add_foreign_key "transactions", "users"
   add_foreign_key "users", "user_roles"
+  add_foreign_key "users_products", "products"
+  add_foreign_key "users_products", "users"
 end
