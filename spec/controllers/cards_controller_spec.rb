@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe CardsController, type: :controller do
-  let(:admin_user) { create(:user, user_role: create(:user_role, role: 'admin'), email: 'admin@example.com', password: '123456') }
-  let(:client_user) { create(:user, user_role: create(:user_role, role: 'client'), email: 'client@example.com', password: '123456') }
+  let(:admin_user) { create(:user,:admin) }
+  let(:client_user) { create(:user, :client) }
   let(:product) { create(:product, brand: create(:brand, name: "test_brand", status: "active")) }
   let(:card) { create(:card, product: product, user: client_user, status: "active") }
 

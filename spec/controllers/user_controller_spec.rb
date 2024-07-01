@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe UsersController, type: :controller do
   let(:valid_attributes) { { email: 'test@example.com', password: 'password123', password_confirmation: 'password123', user_role_id: user_role.id } }
   let(:invalid_attributes) { { email: 'invalid_email', password: 'password123', password_confirmation: 'password123', user_role_id: user_role.id } }
-  let(:admin_user) { create(:user, user_role: create(:user_role, role: 'admin'), email: 'admin@example.com', password: '123456') }
-  let(:client_user) { create(:user, user_role: create(:user_role, role: 'client'), email: 'client@example.com', password: '123456') }
+  let(:admin_user) { create(:user,:admin) }
+  let(:client_user) { create(:user, :client) }
   let(:user_role) { create(:user_role, role: 'client') }
 
   before do

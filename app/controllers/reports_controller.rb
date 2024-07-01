@@ -1,5 +1,16 @@
-class ReportsController < ApplicationController
+class ReportsController < ApiController
   include Authenticatable
+  def by_brand
+    brand = Brand.find(params[:brand_id])
+    products = brand.products
+    render json: paginate_records(products)
+  end
+
+  def by_client
+    client = User.find(params[:client_id])
+    cards = client.cards
+    render json: paginate_records(cards)
+  end
 
   def transactions_report
     start_date = params[:start_date].presence || Time.zone.now.beginning_of_month

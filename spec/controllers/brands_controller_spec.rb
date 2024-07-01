@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe BrandsController, type: :controller do
   let(:valid_attributes) { { name: 'Test Brand', country: 'DE', status: 'active' } }
-  let(:admin_user) { create(:user, user_role: create(:user_role, role: 'admin'), email: 'admin@example.com', password: '123456' )}
-  let(:client_user) { create(:user, user_role: create(:user_role, role: 'client'), email: 'client@example.com', password: '123456') }
+  let(:admin_user) { create(:user,:admin) }
+  let(:client_user) { create(:user, :client) }
 
 
   describe 'GET #index' do

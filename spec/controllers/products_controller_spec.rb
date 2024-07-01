@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe ProductsController, type: :controller do
-  let(:admin_user) { create(:user, user_role: create(:user_role, role: 'admin'), email: 'admin@example.com', password: '123456') }
-  let(:client_user) { create(:user, user_role: create(:user_role, role: 'client'), email: 'client@example.com', password: '123456') }
+  let(:admin_user) { create(:user,:admin) }
+  let(:client_user) { create(:user, :client) }
   let(:product) { create(:product, brand: create(:brand, name: "test_brand", status: "active")) }
   let(:valid_attributes) { { name: 'Test Product', description: 'Test Description', price: 10.0, status: 'active',
                              brand: create(:brand, name: 'test_brand', country: 'DE'), } }

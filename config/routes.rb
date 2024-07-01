@@ -30,6 +30,11 @@ Rails.application.routes.draw do
   resources :users, only: [:create]
   resources :transactions, only: [:create]
 
-
-  get 'reports/transactions', to: 'reports#transactions_report'
+  resources :reports, only: [] do
+    collection do
+      get :by_brand
+      get :by_client
+      get :transactions, to: 'reports#transactions_report'
+    end
+  end
 end
