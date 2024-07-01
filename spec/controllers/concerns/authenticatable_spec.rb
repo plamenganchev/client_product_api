@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Authenticatable, type: :controller do
+RSpec.describe Api::V1::Authenticatable, type: :controller do
   controller(ApplicationController) do
     def index
       render json: { message: 'Authenticated' }, status: :ok

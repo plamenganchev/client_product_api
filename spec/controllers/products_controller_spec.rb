@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe ProductsController, type: :controller do
+RSpec.describe Api::V1::ProductsController, type: :controller do
   let(:admin_user) { create(:user,:admin) }
   let(:client_user) { create(:user, :client) }
   let(:product) { create(:product, brand: create(:brand, name: "test_brand", status: "active")) }

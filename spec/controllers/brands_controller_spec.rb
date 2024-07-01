@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe BrandsController, type: :controller do
+RSpec.describe Api::V1::BrandsController, type: :controller do
   let(:valid_attributes) { { name: 'Test Brand', country: 'DE', status: 'active' } }
   let(:admin_user) { create(:user,:admin) }
   let(:client_user) { create(:user, :client) }

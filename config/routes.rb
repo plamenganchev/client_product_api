@@ -7,34 +7,38 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
-  post 'login', to: 'sessions#create'
-  post 'client_login', to: 'client_sessions#create'
+  namespace :api do
+    namespace :v1 do
+      post 'login', to: 'sessions#create'
+      post 'client_login', to: 'client_sessions#create'
 
-  resources :brands
-  resources :products, only: [:index] do
-    collection do
-      post :assign_to_client
-      get :search
-      get :generate_report
-      get :accessible
-      get :assign_to_user
-    end
-  end
-  resources :cards, only: [] do
-    collection do
-      post :issue
-      put :cancel
-      get :generate_report
-    end
-  end
-  resources :users, only: [:create]
-  resources :transactions, only: [:create]
+      resources :brands
+      resources :products, only: [:index] do
+        collection do
+          post :assign_to_client
+          get :search
+          get :generate_report
+          get :accessible
+          get :assign_to_user
+        end
+      end
+      resources :cards, only: [] do
+        collection do
+          post :issue
+          put :cancel
+          get :generate_report
+        end
+      end
+      resources :users, only: [:create]
+      resources :transactions, only: [:create]
 
-  resources :reports, only: [] do
-    collection do
-      get :by_brand
-      get :by_client
-      get :transactions, to: 'reports#transactions_report'
+      resources :reports, only: [] do
+        collection do
+          get :by_brand
+          get :by_client
+          get :transactions, to: 'reports#transactions_report'
+        end
+      end
+      end
     end
-  end
 end

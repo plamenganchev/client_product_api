@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe UsersController, type: :controller do
+RSpec.describe Api::V1::UsersController, type: :controller do
   let(:valid_attributes) { { email: 'test@example.com', password: 'password123', password_confirmation: 'password123', user_role_id: user_role.id } }
   let(:invalid_attributes) { { email: 'invalid_email', password: 'password123', password_confirmation: 'password123', user_role_id: user_role.id } }
   let(:admin_user) { create(:user,:admin) }

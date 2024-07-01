@@ -1,7 +1,7 @@
 # spec/controllers/reports_controller_spec.rb
 require 'rails_helper'
 
-RSpec.describe ReportsController, type: :controller do
+RSpec.describe Api::V1::ReportsController, type: :controller do
   let(:admin_user) { create(:user,:admin) }
   let(:client_user) { create(:user, :client) }
   let(:brand) { create(:brand) }
