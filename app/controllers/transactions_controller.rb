@@ -1,5 +1,4 @@
-class TransactionsController < ApplicationController
-  include Authenticatable
+class TransactionsController < ApiController
 
   def create
     transaction = Transaction.new(transaction_params)

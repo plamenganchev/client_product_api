@@ -1,5 +1,5 @@
 class ReportsController < ApiController
-  include Authenticatable
+  before_action :authenticate_admin, except: [:transactions_report]
   def by_brand
     brand = Brand.find(params[:brand_id])
     products = brand.products
