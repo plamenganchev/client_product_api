@@ -1,6 +1,5 @@
 class TransactionsController < ApplicationController
   include Authenticatable
-  include UserForPaperTrail
 
   def create
     transaction = Transaction.new(transaction_params)

@@ -1,6 +1,5 @@
 class ApiController < ApplicationController
   include Authenticatable
-  include UserForPaperTrail
 
   before_action :set_record, only: [:show, :update, :destroy]
   before_action :authenticate_admin

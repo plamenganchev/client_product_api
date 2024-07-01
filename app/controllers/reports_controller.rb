@@ -1,6 +1,5 @@
 class ReportsController < ApplicationController
   include Authenticatable
-  include UserForPaperTrail
 
   def transactions_report
     start_date = params[:start_date].presence || Time.zone.now.beginning_of_month
