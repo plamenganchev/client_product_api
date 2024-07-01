@@ -3,7 +3,7 @@ class ApiController < ApplicationController
   include UserForPaperTrail
 
   before_action :set_record, only: [:show, :update, :destroy]
-  before_action :authenticate_admin, only: [:create, :update, :destroy]
+  before_action :authenticate_admin
 
   DEFAULT_PAGE = 1
   DEFAULT_PER_PAGE = 10

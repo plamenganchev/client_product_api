@@ -1,4 +1,5 @@
 class CardsController < ApiController
+  before_action :authenticate_admin, except: [:issue, :cancel, :generate_report]
   def issue
     product = Product.find(params[:product_id])
     card = Card.new(
