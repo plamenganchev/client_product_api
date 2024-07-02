@@ -1,5 +1,7 @@
 module Api::V1
   class ClientSessionsController < ApplicationController
+    before_action :authenticate_user, except: [:create]
+
     def create
       client = User.find_by(authentication_token: params[:authentication_token])
 

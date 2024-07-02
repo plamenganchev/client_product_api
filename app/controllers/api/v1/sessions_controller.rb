@@ -1,5 +1,6 @@
 module Api::V1
   class SessionsController < ApplicationController
+    before_action :authenticate_user, except: [:create]
     def create
       user = User.find_by(email: params[:email])
       return unless user.admin?
