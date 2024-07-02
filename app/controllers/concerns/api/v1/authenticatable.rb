@@ -12,15 +12,16 @@ module Api::V1::Authenticatable
         decoded_token = JwtService.decode(token)
         @current_user = User.find_by(id: decoded_token[:user_id]) if decoded_token
       end
-      @current_user ? log_api_request({user: @current_user}) : log_api_request({api_key: token})
+      log_api_request(token)
       render json: { error: 'Unauthorized' }, status: :unauthorized unless @current_user
     end
 
     def current_user
       @current_user
     end
-
-    def log_api_request(additional_params)
+    private
+    def log_api_request(token)
+      additional_params =  @current_user ? {user: @current_user} : {api_key: token}
       begin
         ApiRequest.create({
           endpoint: request.fullpath,
