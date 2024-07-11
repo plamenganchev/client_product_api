@@ -9,14 +9,14 @@ Technology requirements <br />
 ● An API developed in Ruby On Rails has to be delivered. <br />
 ● It must have authentication through JWT.  <br />
 ● To be delivered repository in Github/Gitlab <br />
-Functional requirements 
-As Admin 
+Functional requirements  <br />
+As Admin  <br />
 ● I want to be able to log in and sign in with my email. <br />
 ● I want to be able to add brand (define up to 5 data fields for the brand object) <br />
-● I want to be able to add, update and delete products from the brands. (define <br />
-up to 5 data fields for the product object)
-● I want to be able to change the brand and product state, based on the two <br />
-states defined before: active, inactive.
+● I want to be able to add, update and delete products from the brands. (define
+up to 5 data fields for the product object) <br />
+● I want to be able to change the brand and product state, based on the two
+states defined before: active, inactive. <br />
 ● I want to be able to add client and define authentication and payout rate <br />
 ● I want to be able to set accessible products per client <br />
 ● Log all user actions within the system for security and accountability purposes.
