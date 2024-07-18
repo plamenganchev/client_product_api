@@ -5,7 +5,7 @@ RSpec.describe Api::V1::ProductsController, type: :controller do
   let(:client_user) { create(:user, :client) }
   let(:product) { create(:product, brand: create(:brand, name: "test_brand", status: "active")) }
   let(:valid_attributes) { { name: 'Test Product', description: 'Test Description', price: 10.0, status: 'active',
-                             brand: create(:brand, name: 'test_brand', country: 'DE'), } }
+                             brand: create(:brand, name: 'test_brand', country_id: create(:country).id), } }
   let(:card) { create(:card, product: product, user: client_user, status: "active") }
 
   before do

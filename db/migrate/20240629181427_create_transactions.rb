@@ -4,7 +4,7 @@ class CreateTransactions < ActiveRecord::Migration[7.1]
       t.references :user, null: false, foreign_key: true
       t.references :product, null: false, foreign_key: true
       t.integer :transaction_type
-      t.decimal :amount
+      t.integer :amount
 
       t.timestamps
     end

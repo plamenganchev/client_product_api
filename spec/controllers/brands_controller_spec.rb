@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Api::V1::BrandsController, type: :controller do
-  let(:valid_attributes) { { name: 'Test Brand', country: 'DE', status: 'active' } }
+  let(:valid_attributes) { { name: 'Test Brand', country_id: create(:country).id, status: 'active' } }
   let(:admin_user) { create(:user,:admin) }
   let(:client_user) { create(:user, :client) }
 
@@ -37,7 +37,7 @@ RSpec.describe Api::V1::BrandsController, type: :controller do
   end
 
   describe 'PUT #update' do
-    let!(:brand) { create(:brand, country: "DE", status: 'active') }
+    let!(:brand) { create(:brand, country: create(:country), status: 'active') }
 
     context 'as an admin user' do
       it 'updates the requested brand' do
@@ -59,7 +59,7 @@ RSpec.describe Api::V1::BrandsController, type: :controller do
   end
 
   describe 'DELETE #destroy' do
-    let!(:brand) { create(:brand, country: "DE", status: 'active') }
+    let!(:brand) { create(:brand, country: create(:country), status: 'active') }
 
     context 'as an admin user' do
       it 'destroys the requested brand' do

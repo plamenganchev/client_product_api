@@ -7,7 +7,7 @@ module Api::V1
 
 
     def permitted_params
-      params.require(:brand).permit(:name, :country, :description, :status)
+      params.require(:brand).permit(:name, :country_id, :description, :status)
     end
   end
 end

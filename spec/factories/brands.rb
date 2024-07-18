@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :brand do
     name { "Test Brand" }
-    country { "Example Country" }
+    country { create(:country) }
     status { "active" }
   end
 end
