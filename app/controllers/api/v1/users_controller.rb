@@ -1,7 +1,7 @@
 module Api::V1
   class UsersController < ApplicationController
     def create
-      user = User.new(user_params)
+      user = User.new(permitted_params)
       user.user_role_id = UserRole.find_by(role: 'client')&.id
       if user.save
         render json: user, status: :created
@@ -12,7 +12,7 @@ module Api::V1
 
     private
 
-    def user_params
+    def permitted_params
       params.require(:user).permit(:email, :password, :password_confirmation, :user_role_id)
     end
   end

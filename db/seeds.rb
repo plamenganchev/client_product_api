@@ -36,13 +36,26 @@ client_user = User.create!(
 )
 
 puts 'Users seeded successfully!'
-
+puts 'Seeding countries...'
+Country.create!([
+                  { name: 'United States', code: 'US' },
+                  { name: 'Canada', code: 'CA' },
+                  { name: 'United Kingdom', code: 'GB' },
+                  { name: 'Germany', code: 'DE' },
+                  { name: 'France', code: 'FR' },
+                  { name: 'Japan', code: 'JP' },
+                  { name: 'Australia', code: 'AU' },
+                  { name: 'India', code: 'IN' },
+                  { name: 'China', code: 'CN' },
+                  { name: 'Brazil', code: 'BR' }
+                ])
+puts 'Countries seeded successfully!'
 # Seed brands
 puts 'Seeding brands...'
 10.times do
   Brand.create!(
     name: Faker::Company.name,
-    country: Faker::Address.country_code,
+    country: Country.last,
     status: ['active', 'inactive'].sample
   )
 end

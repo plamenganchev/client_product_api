@@ -15,30 +15,31 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_01_185537) do
   enable_extension "plpgsql"
 
   create_table "api_requests", force: :cascade do |t|
-    t.integer "user_id"
-    t.string "api_key"
+    t.bigint "user_id", null: false
     t.string "endpoint"
     t.string "remote_ip"
     t.string "status"
     t.json "payload"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_api_requests_on_user_id"
   end
 
   create_table "brands", force: :cascade do |t|
     t.string "name"
-    t.string "country"
+    t.bigint "country_id", null: false
     t.text "description"
     t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["name", "country"], name: "index_brands_on_name_and_country", unique: true
+    t.index ["country_id"], name: "index_brands_on_country_id"
+    t.index ["name", "country_id"], name: "index_brands_on_name_and_country_id", unique: true
   end
 
   create_table "cards", force: :cascade do |t|
     t.bigint "product_id", null: false
     t.bigint "user_id", null: false
-    t.string "activation_number"
+    t.string "activation_number", null: false
     t.string "pin"
     t.string "status"
     t.datetime "created_at", null: false
@@ -47,8 +48,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_01_185537) do
     t.index ["user_id"], name: "index_cards_on_user_id"
   end
 
+  create_table "countries", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "code", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["code"], name: "index_countries_on_code", unique: true
+    t.index ["name"], name: "index_countries_on_name", unique: true
+  end
+
   create_table "products", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.text "description"
     t.decimal "price"
     t.string "status"
@@ -63,7 +73,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_01_185537) do
     t.bigint "user_id", null: false
     t.bigint "product_id", null: false
     t.integer "transaction_type"
-    t.decimal "amount"
+    t.integer "amount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["product_id"], name: "index_transactions_on_product_id"
@@ -71,7 +81,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_01_185537) do
   end
 
   create_table "user_roles", force: :cascade do |t|
-    t.string "role"
+    t.string "role", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["role"], name: "index_user_roles_on_role", unique: true
@@ -108,6 +118,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_01_185537) do
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
   end
 
+  add_foreign_key "api_requests", "users"
+  add_foreign_key "brands", "countries"
   add_foreign_key "cards", "products"
   add_foreign_key "cards", "users"
   add_foreign_key "products", "brands"

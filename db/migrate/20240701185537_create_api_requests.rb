@@ -2,8 +2,7 @@
 class CreateApiRequests < ActiveRecord::Migration[7.1]
   def change
     create_table :api_requests do |t|
-      t.integer :user_id
-      t.string :api_key
+      t.references :user, null: false, foreign_key: true
       t.string :endpoint
       t.string :remote_ip
       t.string :status

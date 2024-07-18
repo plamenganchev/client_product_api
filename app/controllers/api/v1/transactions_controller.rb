@@ -2,7 +2,7 @@ module Api::V1
   class TransactionsController < ApiController
 
     def create
-      transaction = Transaction.new(transaction_params)
+      transaction = Transaction.new(permitted_params)
       if transaction.save
         render json: transaction, status: :created
       else
@@ -12,7 +12,7 @@ module Api::V1
 
     private
 
-    def transaction_params
+    def permitted_params
       params.require(:transaction).permit(:client_id, :product_id, :transaction_type, :amount)
     end
   end
